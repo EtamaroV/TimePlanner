@@ -30,7 +30,7 @@ import { RouterLink, RouterView } from 'vue-router'
 </svg>
 
             </div>
-            <div class="navbtn-label">จับเวลา</div>
+            <div class="navbtn-label">เป้าหมาย</div>
         </RouterLink>
 
         <RouterLink class="navbtn" to="/settings">
