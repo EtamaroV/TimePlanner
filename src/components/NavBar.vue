@@ -76,6 +76,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
     fill: #484C52;
     color: #484C52;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .navbtn.router-link-active {
