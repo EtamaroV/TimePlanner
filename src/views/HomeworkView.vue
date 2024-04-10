@@ -1,25 +1,33 @@
 <template>
   <div>
+    <!-- แสดงค่าที่ป้อนไว้ก่อน -->
+    <div v-if="!showBar" class="submitted-values">
+      <p class="submitted-value">วันที่ส่ง: {{ textInput1 }}</p>
+      <p class="submitted-value">ชื่อการบ้าน: {{ textInput2 }}</p>
+      <p class="submitted-value">วิชา: {{ textInput3 }}</p>
+      <p class="submitted-value">ลายละเอียด: {{ textInput4 }}</p>
+    </div>
+
     <button class="add-button" @click="toggleBar">+</button>
     <div v-if="showBar" class="black-bar">
       <div class="row">
         <div class="text-container">
-          <input type="text" v-model="textInput1" class="text-input" placeholder="วันที่ส่ง">
+          <input type="text" v-model="textInput1" class="text-input" placeholder="วันที่ส่ง" @keyup.enter="submitForm">
         </div>
       </div>
       <div class="row">
         <div class="text-container">
-          <input type="text" v-model="textInput2" class="text-input" placeholder="ชื่อการบ้าน">
+          <input type="text" v-model="textInput2" class="text-input" placeholder="ชื่อการบ้าน" @keyup.enter="submitForm">
         </div>
       </div>
       <div class="row">
         <div class="text-container">
-          <input type="text" v-model="textInput3" class="text-input" placeholder="วิชา">
+          <input type="text" v-model="textInput3" class="text-input" placeholder="วิชา" @keyup.enter="submitForm">
         </div>
       </div>
       <div class="row">
         <div class="text-container">
-          <input type="text" v-model="textInput4" class="text-input" placeholder="ลายละเอียด">
+          <input type="text" v-model="textInput4" class="text-input" placeholder="ลายละเอียด" @keyup.enter="submitForm">
         </div>
       </div>
     </div>
@@ -38,6 +46,10 @@ const textInput4 = ref('');
 
 function toggleBar() {
   showBar.value = !showBar.value;
+}
+
+function submitForm() {
+  console.log("Form submitted");
 }
 </script>
 
@@ -58,19 +70,18 @@ function toggleBar() {
   position: absolute;
   bottom: 0;
   right: 0;
-  width: 2111px;
-  height: 444px;
-  background-color: black;
+  width: 100%;
+  max-width: 10000px; 
+  height: 350px;
+  background-color: #000; 
   padding: 20px;
-  overflow-y: auto; 
-  display: grid;
-  grid-template-rows: repeat(4, auto);
-  row-gap: 10px;
+  overflow-y: auto;
 }
 
 .row {
   display: flex;
   justify-content: center;
+  margin-bottom: 10px;
 }
 
 .text-container {
@@ -80,7 +91,26 @@ function toggleBar() {
 
 .text-input {
   width: 100%; 
-  padding: 5px;
-  font-size: 16px;
+  padding: 10px;
+  font-size: 18px;
+  border: none;
+  border-radius: 5px;
+  background-color: #333;
+  color: #fff;
+}
+
+.submitted-values {
+  padding: 20px;
+  margin-bottom: 20px;
+  width: auto;
+  background-color: #f0f0f0;
+  border-radius: 20px;
+  position: fixed;
+  top: 15%;
+}
+
+.submitted-value {
+  font-size: 18px;
+  margin-bottom: 10px;
 }
 </style>
