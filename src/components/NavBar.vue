@@ -23,7 +23,7 @@ import { RouterLink, RouterView } from 'vue-router'
             <div class="navbtn-label">การบ้าน</div>
         </RouterLink>
 
-        <RouterLink class="navbtn" to="/timer">
+        <RouterLink class="navbtn" to="/goals">
             <div class="navbtn-icon">
                 <svg width="100%" height="100%" viewBox="0 0 25 25" xmlns="http://www.w3.org/2000/svg">
 <path d="M12.75 0.5C19.386 0.5 24.75 5.876 24.75 12.5C24.75 19.136 19.386 24.5 12.75 24.5C6.126 24.5 0.75 19.136 0.75 12.5C0.75 5.876 6.126 0.5 12.75 0.5ZM12.33 6.416C11.838 6.416 11.43 6.812 11.43 7.316V13.376C11.43 13.688 11.598 13.976 11.874 14.144L16.578 16.952C16.722 17.036 16.878 17.084 17.046 17.084C17.346 17.084 17.646 16.928 17.814 16.64C18.066 16.22 17.934 15.668 17.502 15.404L13.23 12.86V7.316C13.23 6.812 12.822 6.416 12.33 6.416Z"/>
@@ -54,7 +54,7 @@ import { RouterLink, RouterView } from 'vue-router'
     position: fixed;
     width: 100%;
     bottom: 0;
-    height: 100px;
+    height: calc(65px + env(safe-area-inset-bottom));
 
     border-top: 1px solid #E3E3E3;
     padding-top: 13.5px;
@@ -76,6 +76,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
     fill: #484C52;
     color: #484C52;
+
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 .navbtn.router-link-active {
