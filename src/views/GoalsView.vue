@@ -123,8 +123,9 @@
   </template>
   
 <style>
+
 .goals-top {
-  padding: 22px 22px; 
+  padding: 22px 0; 
   display: flex;
   flex-direction: column;
   row-gap: 30px;
@@ -262,7 +263,9 @@
 .goals-streak {
   margin-top: 7px;
   position: absolute;
-  right: 24px;
+
+  margin-left: 330px;
+  
   text-align: center;
 
   font-size: 13px;
