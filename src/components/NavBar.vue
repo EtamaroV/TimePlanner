@@ -63,6 +63,8 @@ import { RouterLink, RouterView } from 'vue-router'
 
     display: flex;
     justify-content: space-around;
+
+    z-index: 9;
 }
 
 .navbtn {

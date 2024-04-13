@@ -264,7 +264,7 @@
   margin-top: 7px;
   position: absolute;
 
-  margin-left: 330px;
+  margin-left: 300px;
   
   text-align: center;
 

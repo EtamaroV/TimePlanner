@@ -1,9 +1,14 @@
 <script setup>
-
+import { RouterLink, RouterView } from 'vue-router'
 </script>
 
 <template>
- <div class="main-home">
+<router-view v-slot="{ Component }">
+  <transition name="slide" mode="out-in">
+    <component :is="Component" />
+  </transition>
+</router-view>
+<div class="main-home">
     <div class="header-home">
         <div class="zonetop-home">
             <div class="datelabel-home">วันจันทร์</div>
@@ -15,11 +20,11 @@
                     </svg>
                 </div>
 
-                <div class="addbtn-home">
+                <RouterLink class="addbtn-home" to="/add">
                     <svg height="100%" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
                         <path d="M12.6923 1.69231C12.6923 0.75625 11.9361 0 11 0C10.0639 0 9.30769 0.75625 9.30769 1.69231V9.30769H1.69231C0.75625 9.30769 0 10.0639 0 11C0 11.9361 0.75625 12.6923 1.69231 12.6923H9.30769V20.3077C9.30769 21.2437 10.0639 22 11 22C11.9361 22 12.6923 21.2437 12.6923 20.3077V12.6923H20.3077C21.2437 12.6923 22 11.9361 22 11C22 10.0639 21.2437 9.30769 20.3077 9.30769H12.6923V1.69231Z" fill="#484C52"/>
                     </svg>
-                </div>
+                </RouterLink>
 
             </div>
             
@@ -247,7 +252,7 @@
 <style>
 .header-home {
     width: 100%;
-    padding: 20px 20px;
+    padding: 20px 10px;
 }
 
 .zonetop-home {
@@ -337,7 +342,7 @@
 }
 
 .schedulesubject-home {
-    padding: 0 20px;
+    padding: 0 0;
     display: flex;
     flex-direction: column;
     row-gap: 7px;
@@ -348,11 +353,11 @@
     grid-template-areas:
     'time bar descriptionT descriptionV period'
     'subject bar descriptionT descriptionV period';
-    padding: 10px 5px 10px 16px;
+    padding: 8px 5px 8px 16px;
     border-radius: 17px;
     background-color: #EAEAEA;
 
-    height: 83px
+    height: 76px;
 }
 
 .subjecttime-home {
@@ -431,8 +436,32 @@
     width: 20px;
     border-radius: 100%;
 
-    transform: translate(-8px, calc(((83px/2)*(1 + ((10 - 1) * 2))) - 10px + ((10 - 1)*7px)));
+    left: -10px;
+
+    transform: translate(0, calc(((76px/2)*(1 + ((5 - 1) * 2))) - 10px + ((5 - 1)*7px)));
 
     position: absolute;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+.slide-enter-active,
+.slide-leave-active {
+    transition: transform 0.3s ease-in-out, opacity 0.2s ease;
+}
+
+.slide-enter-from,
+.slide-leave-to {
+    transform: translateY(90vh);
+        
 }
 </style>

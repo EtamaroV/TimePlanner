@@ -9,7 +9,7 @@
     "preview": "vite preview"
   },
   "dependencies": {
-    "@radix-ui/themes": "^3.0.2",
+    "radix-vue": "^1.7.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0"
   },
