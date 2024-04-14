@@ -54,10 +54,10 @@ import { RouterLink, RouterView } from 'vue-router'
     position: fixed;
     width: 100%;
     bottom: 0;
-    height: calc(65px + env(safe-area-inset-bottom));
+    height: calc(60px + env(safe-area-inset-bottom));
 
     border-top: 1px solid #E3E3E3;
-    padding-top: 13.5px;
+    padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
 

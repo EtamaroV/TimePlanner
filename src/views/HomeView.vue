@@ -462,6 +462,7 @@ import { RouterLink, RouterView } from 'vue-router'
 .slide-enter-from,
 .slide-leave-to {
     transform: translateY(90vh);
+    opacity: 0;
         
 }
 </style>
