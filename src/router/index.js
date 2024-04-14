@@ -11,6 +11,7 @@ import Flyouttab from '@/components/Flyouttab.vue'
 
 //Components - Home
 import HomeAddTab from '@/components/Home/HomeAddTab.vue'
+import HomeSubjectListTab from '@/components/Home/HomeSubjectListTab.vue'
 
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
@@ -30,8 +31,8 @@ const router = createRouter({
               component: HomeAddTab
             },
             {
-              path: 'subjectlist',
-              component: HomeAddTab
+              path: 'subject',
+              component: HomeSubjectListTab
             }
           ]
         }
