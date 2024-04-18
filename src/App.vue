@@ -48,5 +48,6 @@ preventBrowserHistorySwipeGestures();
   align-content: center;
   max-width: 62.5rem;
   width: calc(100% - 1.5rem);
+  padding-top: env(safe-area-inset-top);
 }
 </style>

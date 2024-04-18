@@ -75,7 +75,7 @@ const goBack = () => {
     position: absolute;
     max-width: 62.5rem;
     width: 100vw;
-    height: 95vh;
+    height: calc(100vh - env(safe-area-inset-top) - 20px);
     background-color: #ffffff;
     bottom: 0;
     border-top-left-radius: 39px;
