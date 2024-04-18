@@ -3,22 +3,41 @@ import Vuex from 'vuex'
 const addschedule = {
     namespaced: true,
     state: {
+      subjectExist: false,
       subject: {
         id: null,
         name: null,
         description: {
             room: null,
             code: null,
-            Teacher: null
+            teacher: null
         }
       },
-      timestart: null,
-      timeend: null,
+      time: {
+        startPeriod: null,
+        endPeriod: null,
+      },
+      color: null
     },
     mutations: {
-        setSubjectName(state, payload) {
-            state.subject.name = payload;
-        },
+      setsubjectExist(state, payload) {
+        state.subjectExist = payload
+      },
+      setSubject(state, payload) {
+        state.subject.id = payload.id;
+        state.subject.name = payload.name;
+        state.subject.description.room = payload.description.room;
+        state.subject.description.code = payload.description.code;
+        state.subject.description.teacher = payload.description.teacher;
+      },
+      setTime(state, payload) {
+        console.log(payload)
+        state.time.startPeriod = payload.startPeriod;
+        state.time.endPeriod = payload.endPeriod;
+      },
+      setColor(state, payload) {
+        state.color = payload;
+      },
     },
 }
 
@@ -31,7 +50,7 @@ const SubjectList = {
       description: {
           room: '543',
           code: 'ท12345',
-          Teacher: 'ครูลองดู'
+          teacher: 'ครูลองดู'
       }
     },
     {
@@ -40,7 +59,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -49,7 +68,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -58,7 +77,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -67,7 +86,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -76,7 +95,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -85,7 +104,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -94,7 +113,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -103,7 +122,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
     {
@@ -112,7 +131,7 @@ const SubjectList = {
       description: {
           room: '345',
           code: 'ท54321',
-          Teacher: 'ครูลองกอง'
+          teacher: 'ครูลองกอง'
       }
     },
   ]
