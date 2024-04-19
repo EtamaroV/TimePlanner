@@ -2,6 +2,11 @@
 import { RouterLink, RouterView } from 'vue-router'
 import NavBar from '@/components/NavBar.vue';
 
+import { useStore } from 'vuex'
+
+const store = useStore()
+//store.commit('SubjectList/initialiseSubjectList')
+
 function preventBrowserHistorySwipeGestures() {
   function touchStart(ev) {
     if (ev.touches.length === 1) {
@@ -38,6 +43,14 @@ preventBrowserHistorySwipeGestures();
   
   <NavBar/>
 </template>
+
+<script scope>
+export default {
+  beforeCreate() {
+		this.$store.commit('SubjectList/initialiseSubjectList');
+	}
+}
+</script>
 
 
 <style>

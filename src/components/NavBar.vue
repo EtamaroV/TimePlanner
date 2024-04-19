@@ -97,7 +97,7 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 .navbtn-icon {
-    height: 24px;
+    height: 23px;
 }
 
 </style>

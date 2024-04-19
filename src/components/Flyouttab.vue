@@ -3,7 +3,6 @@ import { RouterLink, RouterView, useRouter} from 'vue-router'
 
 const router = useRouter()
 
-import InputText from 'primevue/inputtext';
 import Button from 'primevue/button';
 
 defineProps(['title', 'close_route'])

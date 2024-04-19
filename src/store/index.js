@@ -14,6 +14,7 @@ const addschedule = {
         }
       },
       time: {
+        day: null,
         startPeriod: null,
         endPeriod: null,
       },
@@ -31,133 +32,79 @@ const addschedule = {
         state.subject.description.teacher = payload.description.teacher;
       },
       setTime(state, payload) {
-        console.log(payload)
+        state.time.day = payload.day;
         state.time.startPeriod = payload.startPeriod;
         state.time.endPeriod = payload.endPeriod;
       },
       setColor(state, payload) {
         state.color = payload;
       },
+
+      clearState(state) {
+        state.subjectExist = false
+        state.subject.id = null;
+        state.subject.name = null;
+        state.subject.description.room = null;
+        state.subject.description.code = null;
+        state.subject.description.teacher = null;
+        state.time.day = null;
+        state.time.startPeriod = null;
+        state.time.endPeriod = null;
+        state.color = null;
+      }
     },
 }
 
 const SubjectList = {
   namespaced: true,
   state: [
-    {
-      id: 'TEST001',
-      name: 'ทดสอบวิชา1',
-      description: {
-          room: '543',
-          code: 'ท12345',
-          teacher: 'ครูลองดู'
-      }
+  ],
+  mutations: {
+    initialiseSubjectList(state) {
+			// Check if the ID exists
+			if(localStorage.getItem('SubjectList')) {
+
+        const storedData = JSON.parse(localStorage.getItem('SubjectList'))
+
+        state.splice(0, state.length, ...storedData);
+        //console.log(state)
+			}
+		},
+
+    addSubject(state, payload) {
+      state.push(payload)
+
+      localStorage.setItem('SubjectList', JSON.stringify(state));
     },
-    {
-      id: 'TEST002',
-      name: 'ทดสอบวิชา2',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST003',
-      name: 'ทดสอบวิชา3',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST004',
-      name: 'ทดสอบวิชา4',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST005',
-      name: 'ทดสอบวิชา5',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST006',
-      name: 'ทดสอบวิชา6',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST007',
-      name: 'ทดสอบวิชา7',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST008',
-      name: 'ทดสอบวิชา8',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST009',
-      name: 'ทดสอบวิชา9',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-    {
-      id: 'TEST010',
-      name: 'ทดสอบวิชา10',
-      description: {
-          room: '345',
-          code: 'ท54321',
-          teacher: 'ครูลองกอง'
-      }
-    },
-  ]
+  },
 }
+
 
 const ScheduleList = {
   namespaced: true,
   state: {
-    sunday: [],
-    monday: [
+    0: [],
+    1: [
       {
         id: 'TEST001',
-        timestart: 0,
-        timeend: 1
+        startPeriod: 0,
+        endPeriod: 1
       },
     ],
-    tuesday: [],
-    wednesday: [],
-    thursday: [],
-    friday: [],
-    saturday: []
+    2: [],
+    3: [],
+    4: [],
+    5: [],
+    6: []
   },
   mutations: {
-      setSubjectName(state, payload) {
-          state.subject.name = payload;
-      },
+    addSchedulePeriod(state, payload) {
+      state[payload.day].push(payload.detail)
+      //console.log(state)
+    },
+    setLocalStorage(state, payload) {
+        state.subject.name = payload;
+    },
   },
 }
 
@@ -176,6 +123,7 @@ export default new Vuex.Store({
   },
   modules: {
     addschedule,
-    SubjectList
+    SubjectList,
+    ScheduleList
   }
 })

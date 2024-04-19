@@ -12,6 +12,7 @@
     "primevue": "^3.51.0",
     "vue": "^3.4.21",
     "vue-router": "^4.3.0",
+    "vue-uuid": "^3.0.0",
     "vuex": "^4.1.0"
   },
   "devDependencies": {
