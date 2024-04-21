@@ -37,6 +37,7 @@ const getContrast = (hexcolor) => {
 
 };
 
+
 </script>
 
 <template>
