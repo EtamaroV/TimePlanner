@@ -13,6 +13,9 @@ import Flyouttab from '@/components/Flyouttab.vue'
 import HomeAddTab from '@/components/Home/HomeAddTab.vue'
 import HomeAddColorPalette from '@/components/Home/HomeAddColorPalette.vue'
 
+//Components - Homework
+import homeworkadd from '@/components/Homework/homeworkadd.vue'
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
@@ -41,7 +44,20 @@ const router = createRouter({
     {
       path: '/homework',
       name: 'homework',
-      component: HomeworkView
+      component: HomeworkView,
+      children: [
+        {
+          path: 'add',
+          component: Flyouttab,
+          props: { title: "เพิ่มคาบเรียน", close_route: "/homework" },
+          children: [
+            {
+              path: '',
+              component: homeworkadd
+            }
+          ]
+        }
+      ]
     },
     {
       path: '/goals',

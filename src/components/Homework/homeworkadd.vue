@@ -1,0 +1,46 @@
+<script setup>
+import { useStore } from 'vuex'
+
+import InputText from 'primevue/inputtext';
+import Listbox from 'primevue/listbox';
+
+import Calendar from 'primevue/calendar';
+
+
+const store = useStore()
+
+</script>
+<template>
+    <div class="card flex flex-wrap gap-3 p-fluid">
+        <div class="flex-auto">
+            <label for="buttondisplay" class="font-bold block mb-2"> ใส่วันที่กำหนดส่ง </label>
+            <Calendar v-model="buttondisplay" showIcon :showOnFocus="false" inputId="buttondisplay" />
+        </div>
+        <div class="flex-auto">
+            <label for="username">ใส่ชื่อวิชา</label>
+                <InputText id="username" v-model="value" />
+        </div>
+        <div class="flex-auto">
+            <label for="username">ใส่ชื่องาน</label>
+                <InputText id="username" v-model="value" />
+        </div>
+        <div class="flex-auto">
+            <label for="username">ใส่ลายละเอียด</label>
+                <InputText id="username" v-model="value" />
+                
+        </div>
+        </div>
+      
+</template>
+
+<script>
+export default {
+    data() {
+        return {
+            
+            subjectid: null
+        }
+    },
+}
+</script>
+

@@ -1,42 +1,9 @@
-<template>
-  <div>
-    <!-- แสดงค่าที่ป้อนไว้ก่อน -->
-    <div v-if="!showBar" class="submitted-values">
-      <p class="submitted-value">วันที่ส่ง: {{ textInput1 }}</p>
-      <p class="submitted-value">ชื่อการบ้าน: {{ textInput2 }}</p>
-      <p class="submitted-value">วิชา: {{ textInput3 }}</p>
-      <p class="submitted-value">ลายละเอียด: {{ textInput4 }}</p>
-    </div>
-
-    <button class="add-button" @click="toggleBar">+</button>
-    <div v-if="showBar" class="black-bar">
-      <div class="row">
-        <div class="text-container">
-          <input type="text" v-model="textInput1" class="text-input" placeholder="วันที่ส่ง" @keyup.enter="submitForm">
-        </div>
-      </div>
-      <div class="row">
-        <div class="text-container">
-          <input type="text" v-model="textInput2" class="text-input" placeholder="ชื่อการบ้าน" @keyup.enter="submitForm">
-        </div>
-      </div>
-      <div class="row">
-        <div class="text-container">
-          <input type="text" v-model="textInput3" class="text-input" placeholder="วิชา" @keyup.enter="submitForm">
-        </div>
-      </div>
-      <div class="row">
-        <div class="text-container">
-          <input type="text" v-model="textInput4" class="text-input" placeholder="ลายละเอียด" @keyup.enter="submitForm">
-        </div>
-      </div>
-    </div>
-    <p class="larger-text">การบ้าน</p>
-  </div>
-</template>
-
 <script setup>
+import { RouterLink, RouterView, useRouter} from 'vue-router'
 import { ref } from 'vue';
+
+const router = useRouter()
+
 
 const showBar = ref(false);
 const textInput1 = ref('');
@@ -53,17 +20,35 @@ function submitForm() {
 }
 </script>
 
+<template>
+  <router-view v-slot="{ Component }">
+  <transition name="slide" mode="out-in">
+    <component :is="Component" />
+  </transition>
+</router-view>
+  <div>
+    
+
+    <button class="add-button larger-button" @click="router.push({ path: '/homework/add' })">+</button>
+    
+    
+    <p class="larger-text">การบ้าน</p>
+  </div>
+  
+</template>
+
 <style>
 .larger-text {
-  font-size: 55px; 
+  font-size: 55px;
+  top: 60px; 
 }
 
 .add-button {
-  position: absolute;
-  top: 10px;
+  position: absolute ;
+  top: 100px;
   right: 10px;
-  padding: 10px;
-  font-size: 18px;
+  padding: 20px;
+  font-size:20px;
 }
 
 .black-bar {
