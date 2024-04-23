@@ -2,6 +2,10 @@
 import { RouterLink, RouterView } from 'vue-router'
 import { useStore } from 'vuex'
 
+import { Swiper, SwiperSlide } from 'swiper/vue'
+
+  import 'swiper/css';
+
 const store = useStore()
 </script>
 
@@ -58,199 +62,59 @@ const store = useStore()
         </div>
     </div>
     <div class="content-home">
-        <div class="nowdot-content-home"></div>
-        <div class="schedulesubject-home">
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
+        <swiper class="swiper" :slides-per-view="1" :space-between="30" :loop="true">
 
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
+            <swiper-slide>
+                <div class="nowdot-content-home"></div>
+                <div class="schedulesubject-home">
+                    <div class="subject-home" style="background-color: #DBEEFF;">
+                        <div class="subjecttime-home">08:00-08:50</div>
+                        <div class="subjectname-home">ภาษาอังกฤษ</div>
+                        <div class="subjectbar-home"></div>
+                        <div class="subjectdescriptionTitle-home">
+                            <div class="subjectdescriptionI-home">ห้อง</div>
+                            <div class="subjectdescriptionII-home">รหัสวิชา</div>
+                            <div class="subjectdescriptionIII-home">คุณครู</div>
+                        </div>
+                        <div class="subjectdescriptionValue-home">
+                            <div class="subjectdescriptionValueI-home">725</div>
+                            <div class="subjectdescriptionValueII-home">อ32102</div>
+                            <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
+                        </div>
+                        <div class="subjectperiod-home">1</div>
+                    </div>
+                
+                    <div class="subject-home" style="background-color: #DBEEFF;">
+                        <div class="subjecttime-home">08:00-08:50</div>
+                        <div class="subjectname-home">ภาษาอังกฤษ</div>
+                        <div class="subjectbar-home"></div>
+                        <div class="subjectdescriptionTitle-home">
+                            <div class="subjectdescriptionI-home">ห้อง</div>
+                            <div class="subjectdescriptionII-home">รหัสวิชา</div>
+                            <div class="subjectdescriptionIII-home">คุณครู</div>
+                        </div>
+                        <div class="subjectdescriptionValue-home">
+                            <div class="subjectdescriptionValueI-home">725</div>
+                            <div class="subjectdescriptionValueII-home">อ32102</div>
+                            <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
+                        </div>
+                        <div class="subjectperiod-home">1</div>
+                    </div>
 
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
                 </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
+                <div class="safearea-content-home"></div>
+            </swiper-slide>
+            
 
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #DBEEFF;">
-                <div class="subjecttime-home">08:00-08:50</div>
-                <div class="subjectname-home">ภาษาอังกฤษ</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">อ32102</div>
-                    <div class="subjectdescriptionValueIII-home">ณวริญญ์</div>
-                </div>
-                <div class="subjectperiod-home">1</div>
-            </div>
-            
-            <div class="subject-home" style="background-color: #EFFFDB;">
-                <div class="subjecttime-home">08.50-09.40</div>
-                <div class="subjectname-home">คณิตศาสตร์</div>
-                <div class="subjectbar-home"></div>
-                <div class="subjectdescriptionTitle-home">
-                    <div class="subjectdescriptionI-home">ห้อง</div>
-                    <div class="subjectdescriptionII-home">รหัสวิชา</div>
-                    <div class="subjectdescriptionIII-home">คุณครู</div>
-                </div>
-                <div class="subjectdescriptionValue-home">
-                    <div class="subjectdescriptionValueI-home">725</div>
-                    <div class="subjectdescriptionValueII-home">ค32102</div>
-                    <div class="subjectdescriptionValueIII-home">มินตรา</div>
-                </div>
-                <div class="subjectperiod-home">10</div>
-            </div>
-        </div>
-        <div class="safearea-content-home"></div>
+
+        </swiper>
     </div>
  </div>
 </template>
+
+<script>
+  
+</script>
 
 <style>
 .header-home {
