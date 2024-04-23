@@ -1,10 +1,17 @@
 <script setup>
+import { ref } from "vue";
+
 import { useStore } from 'vuex'
 
 import InputText from 'primevue/inputtext';
 import Listbox from 'primevue/listbox';
 
 import Calendar from 'primevue/calendar';
+import Button from 'primevue/button';
+const buttondisplay = ref();
+const icondisplay = ref();
+const templatedisplay = ref();
+
 
 
 const store = useStore()
@@ -29,6 +36,10 @@ const store = useStore()
                 <InputText id="username" v-model="value" />
                 
         </div>
+        <div class="card flex justify-content-center">
+        <Button label="Submit" />
+    </div>
+        
         </div>
       
 </template>
