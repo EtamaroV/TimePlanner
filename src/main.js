@@ -8,11 +8,13 @@ import router from './router'
 import store from './store'
 
 import PrimeVue from 'primevue/config';
+import ConfirmationService from 'primevue/confirmationservice';
 
 const app = createApp(App)
 
 app.use(router)
 app.use(PrimeVue);
+app.use(ConfirmationService);
 
 app.use(store)
 

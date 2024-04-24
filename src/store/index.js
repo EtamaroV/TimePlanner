@@ -68,6 +68,7 @@ const SubjectList = {
 
         state.splice(0, state.length, ...storedData);
         //console.log(state)
+        state.push({"id":"TEST001","name":"Test555","description":{"room":"123","code":"55555","teacher":"TEACHERTEST  EIEI"},"color":"#f8b28c"})
 			}
 		},
 
@@ -83,27 +84,78 @@ const SubjectList = {
 const ScheduleList = {
   namespaced: true,
   state: {
-    0: [],
-    1: [
-      {
-        id: 'TEST001',
-        startPeriod: 0,
-        endPeriod: 1
-      },
+    0: [
+      
     ],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: []
+    1: [
+
+    ],
+    2: [
+
+    ],
+    3: [
+
+    ],
+    4: [
+
+    ],
+    5: [
+
+    ],
+    6: [
+
+    ]
   },
   mutations: {
+    initialiseScheduleList(state) {
+			// Check if the ID exists
+			if(localStorage.getItem('ScheduleList')) {
+
+        const storedData = JSON.parse(localStorage.getItem('ScheduleList'))
+
+        for (let x in storedData) {
+          if (storedData[x].length > 1) {
+            storedData[x].sort((a, b) => {
+              const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+              const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+              return timeA - timeB;
+            });
+          }
+          state[x] = storedData[x]
+        }
+
+			}
+		},
     addSchedulePeriod(state, payload) {
       state[payload.day].push(payload.detail)
-      //console.log(state)
+
+      for (let i in state) {
+        if (state[i].length > 1) {
+          state[i].sort((a, b) => {
+            const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+            const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+            return timeA - timeB;
+          });
+        }
+      }
+
+      localStorage.setItem('ScheduleList', JSON.stringify(state));
     },
-    setLocalStorage(state, payload) {
-        state.subject.name = payload;
+    removeSchedule(state, payload) {
+      console.log(payload)
+      state[payload.day].splice(payload.index, 1)
+
+      for (let i in state) {
+        if (state[i].length > 1) {
+          state[i].sort((a, b) => {
+            const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+            const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+            return timeA - timeB;
+          });
+        }
+      }
+
+      localStorage.setItem('ScheduleList', JSON.stringify(state));
     },
   },
 }
