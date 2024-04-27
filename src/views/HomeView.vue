@@ -199,7 +199,9 @@ export default {
                 second: 'numeric'
             }).format()
 
-            if (this.subjectLength !== this.$store.state.ScheduleList[this.currentSlide].length) {
+            const nowday = new Date().getDay()
+
+            if (this.subjectLength !== this.$store.state.ScheduleList[nowday].length) {
 
                 this.timer = {
                     nextTimeCheck: null,
@@ -211,30 +213,30 @@ export default {
                     subjectLength: null
                 },
 
-                this.subjectLength = this.$store.state.ScheduleList[this.currentSlide].length
+                this.subjectLength = this.$store.state.ScheduleList[nowday].length
             }
 
             if ((new Date(`1970-01-01T${this.nowtime}`) >= new Date(`1970-01-01T${this.timer.nextTimeCheck}:00`)) || this.timer.nextTimeCheck === null){
                 
-                for (let i in this.$store.state.ScheduleList[this.currentSlide]) {
-                    const SstartPeriod = this.$store.state.ScheduleList[this.currentSlide][i].startPeriod
-                    const SendPeriod = this.$store.state.ScheduleList[this.currentSlide][i].endPeriod
+                for (let i in this.$store.state.ScheduleList[nowday]) {
+                    const SstartPeriod = this.$store.state.ScheduleList[nowday][i].startPeriod
+                    const SendPeriod = this.$store.state.ScheduleList[nowday][i].endPeriod
                     if ((new Date(`1970-01-01T${this.nowtime}`) >= new Date(`1970-01-01T${SstartPeriod}:00`)) && (new Date(`1970-01-01T${this.nowtime}`) < new Date(`1970-01-01T${SendPeriod}:00`))) {
                         this.timer.nextTimeCheck = SendPeriod
-                        this.timer.currentSubject = this.$store.state.ScheduleList[this.currentSlide][i].id
+                        this.timer.currentSubject = this.$store.state.ScheduleList[nowday][i].id
 
-                        if ((Number(i) + 1) < this.$store.state.ScheduleList[this.currentSlide].length && (SendPeriod === this.$store.state.ScheduleList[this.currentSlide][Number(i) + 1].startPeriod)) {
-                            this.timer.nextSubject = this.$store.state.ScheduleList[this.currentSlide][Number(i) + 1].id
+                        if ((Number(i) + 1) < this.$store.state.ScheduleList[nowday].length && (SendPeriod === this.$store.state.ScheduleList[nowday][Number(i) + 1].startPeriod)) {
+                            this.timer.nextSubject = this.$store.state.ScheduleList[nowday][Number(i) + 1].id
                         }
                         break
-                    } else if ((Number(i) + 1) >= this.$store.state.ScheduleList[this.currentSlide].length) {
+                    } else if ((Number(i) + 1) >= this.$store.state.ScheduleList[nowday].length) {
 
-                        for (let ii in this.$store.state.ScheduleList[this.currentSlide]) {
+                        for (let ii in this.$store.state.ScheduleList[nowday]) {
 
-                            const SSstartPeriod = this.$store.state.ScheduleList[this.currentSlide][ii].startPeriod
+                            const SSstartPeriod = this.$store.state.ScheduleList[nowday][ii].startPeriod
                             if (new Date(`1970-01-01T${this.nowtime}`) < new Date(`1970-01-01T${SSstartPeriod}:00`)) {
                                 this.timer.nextTimeCheck = SSstartPeriod
-                                this.timer.nextSubject = this.$store.state.ScheduleList[this.currentSlide][ii].id
+                                this.timer.nextSubject = this.$store.state.ScheduleList[nowday][ii].id
                                 break
                             }
                         }
