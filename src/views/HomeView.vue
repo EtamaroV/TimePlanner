@@ -154,8 +154,6 @@ return (yiq >= 180) ? 'black' : 'white';
 </template>
 
 <script scoped>
-
-
 export default {
     data() {
         return {

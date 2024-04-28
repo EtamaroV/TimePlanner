@@ -142,7 +142,6 @@ const ScheduleList = {
       localStorage.setItem('ScheduleList', JSON.stringify(state));
     },
     removeSchedule(state, payload) {
-      console.log(payload)
       state[payload.day].splice(payload.index, 1)
 
       for (let i in state) {
@@ -160,7 +159,106 @@ const ScheduleList = {
   },
 }
 
+const GoalTimer = {
+  namespaced: true,
+  state: {
+    timerhistory: [],
+    timer: {
+      timeDay: `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
+      
+      timeBegan: null,
+      timeStopped: null,
+      
+      stoppedDuration: 0,
+      running: false
+    }
+  },
+  mutations: {
+    initialiseGoalTimer(state) {
+			// Check if the ID exists
+      if(localStorage.getItem('TimerHistory')) {
+        const GoalTimerstoredData = JSON.parse(localStorage.getItem('TimerHistory'))
+        state.timerhistory = GoalTimerstoredData
+      }
 
+			if(localStorage.getItem('GoalTimer')) {
+
+        const storedData = JSON.parse(localStorage.getItem('GoalTimer'))
+
+        state.timer.timeDay = storedData.timeDay
+
+        if (storedData.timeDay === `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+          state.timer.timeBegan = new Date(storedData.timeBegan)
+          state.timer.timeStopped = storedData.timeStopped === null ? null : new Date(storedData.timeStopped)
+          state.timer.stoppedDuration = storedData.stoppedDuration
+          state.timer.running = storedData.running
+        } else {
+
+          const zeroPrefix = (num, digit) => {
+            var zero = '';
+            for (var i = 0; i < digit; i++) {
+              zero += '0';
+            }
+            return (zero + num).slice(-digit);
+          }
+          
+          if (storedData.running) {
+            var currentTime = new Date(storedData.timeBegan)
+            currentTime.setUTCDate(currentTime.getUTCDate() + 1);
+            currentTime.setHours(0)
+            currentTime.setMinutes(0)
+            currentTime.setSeconds(0)
+            
+            var timeElapsed = new Date(currentTime - new Date(storedData.timeBegan) - storedData.stoppedDuration)
+            , hour = timeElapsed.getUTCHours()
+            , min = timeElapsed.getUTCMinutes()
+            , sec = timeElapsed.getUTCSeconds()
+            , ms = timeElapsed.getUTCMilliseconds();
+
+            const time =
+              zeroPrefix(hour, 2) + ":" +
+              zeroPrefix(min, 2) + ":" +
+              zeroPrefix(sec, 2)
+
+            if (state.timerhistory.find(({ date }) => date === storedData.timeDay)) {
+              state.timerhistory.find(({ date }) => date === storedData.timeDay).time = time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
+            } else {
+              state.timerhistory.push({date: storedData.timeDay, time: time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)})
+            }
+
+          }
+
+        }
+
+        
+        
+			} 
+
+
+		},
+    setGoalTimer(state, payload) {
+      state.timer.timeDay = payload.timeDay
+      state.timer.timeBegan = payload.timeBegan
+      state.timer.timeStopped = payload.timeStopped
+      state.timer.stoppedDuration = payload.stoppedDuration
+      state.timer.running = payload.running
+
+      localStorage.setItem('GoalTimer', JSON.stringify(state.timer));
+    },
+    saveTimerHistory(state, payload) {
+
+
+      if (state.timerhistory.find(({ date }) => date === payload.timeDay)) {
+        state.timerhistory.find(({ date }) => date === payload.timeDay).time = payload.time
+      } else {
+        state.timerhistory.push({date: payload.timeDay, time: payload.time})
+      }
+
+
+      localStorage.setItem('TimerHistory', JSON.stringify(state.timerhistory));
+    },
+  },
+}
 
 
 
@@ -176,6 +274,9 @@ export default new Vuex.Store({
   modules: {
     addschedule,
     SubjectList,
-    ScheduleList
+    
+    ScheduleList,
+
+    GoalTimer
   }
 })
