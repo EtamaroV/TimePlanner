@@ -1,14 +1,21 @@
+<script setup>
+import { useStore } from 'vuex'
+import Chart from 'primevue/chart';
+
+const store = useStore()
+</script>
+
 <template>
     <div class="goals-main">
       <div class="goals-top">
         <div class="goals-allring">
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[0]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[0]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -17,11 +24,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[1]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[1]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -29,11 +36,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[2]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[2]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -41,11 +48,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[3]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[3]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -53,11 +60,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[4]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[4]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -65,11 +72,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[5]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[5]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -77,11 +84,11 @@
           </div>
 
           <div class="goals-dayring">
-            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" style="--dayringprogressbar-progress: 60; --dayringprogressbar-stroke-width: 5px;--dayringprogressbar-size: 38px;">
+            <svg width="38" height="38" viewBox="0 0 38 38" class="goalds-ringprogressbar" :style="{'--dayringprogressbar-progress': `${(allring[6]*100)/18000}`, '--dayringprogressbar-stroke-width': '5px', '--dayringprogressbar-size': '38px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[6]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -93,16 +100,16 @@
         <div class="goals-todayring">
           
           <div class="goals-streak">
-            การต่อเนื่อง<br><span class="goals-streakdaylabel">155</span> วัน
+            การต่อเนื่อง<br><span class="goals-streakdaylabel">{{store.state.GoalTimer.streak}}</span> วัน
           </div>
 
           <div class="goals-todayprogress">
               
-            <svg width="253" height="253" viewBox="0 0 253 253" class="goalds-todayringprogressbar" :style="{'--dayringprogressbar-progress': (timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)*100)/'05:00:00'.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0), '--dayringprogressbar-stroke-width': '15px','--dayringprogressbar-size': '253px'}">
+            <svg width="253" height="253" viewBox="0 0 253 253" class="goalds-todayringprogressbar" :style="{'--dayringprogressbar-progress': (allring[new Date().getDay()]*100)/18000, '--dayringprogressbar-stroke-width': '15px','--dayringprogressbar-size': '253px'}">
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg"
+              <circle class="fg" :style="{'stroke': daycolor[new Date().getDay()]}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -119,7 +126,9 @@
         
         
       </div>
-      <div class="goals-bottom"></div>
+      <div class="goals-bottom">
+        <Chart type="bar"  :data="chart" :options="options" />
+      </div>
     </div>
 </template>
 
@@ -141,6 +150,47 @@ export default {
         stoppedDuration: this.$store.state.GoalTimer.timer.stoppedDuration,
         running: this.$store.state.GoalTimer.timer.running
       },
+
+      allring: {
+        0: this.$store.state.GoalTimer.allring[0],
+        1: this.$store.state.GoalTimer.allring[1],
+        2: this.$store.state.GoalTimer.allring[2],
+        3: this.$store.state.GoalTimer.allring[3],
+        4: this.$store.state.GoalTimer.allring[4],
+        5: this.$store.state.GoalTimer.allring[5],
+        6: this.$store.state.GoalTimer.allring[6]
+      },
+
+      daycolor: {
+        0: '#ff0000',
+        1: '#FFD600',
+        2: '#ff8fff',
+        3: '#01cc01',
+        4: '#ff9900',
+        5: '#33ccff',
+        6: '#993399',
+      },
+
+      chart: {
+        labels: ['อา', 'จ', 'อ', 'พ', 'พฤ', 'ศ', 'ส'],
+        datasets: [
+            {
+                label: 'Sales',
+                data: [13, 4.5, 3, 4, 2, 0, 1],
+
+                borderWidth: 1
+            }
+        ]
+      },
+      options: {
+
+        plugins: {
+          legend: false
+        },
+        responsive: true,
+        maintainAspectRatio: true,
+        
+      }
     };
   },
   beforeDestroy() {
@@ -165,6 +215,8 @@ export default {
         this.zeroPrefix(min, 2) + ":" +
         this.zeroPrefix(sec, 2)
 
+      this.allring[currentTime.getDay()] = this.timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
+
     } else if (this.timer.timeBegan !== null && this.timer.running) {
       var currentTime = new Date()
         , timeElapsed = new Date(currentTime - this.timer.timeBegan - this.timer.stoppedDuration)
@@ -177,6 +229,8 @@ export default {
         this.zeroPrefix(hour, 2) + ":" +
         this.zeroPrefix(min, 2) + ":" +
         this.zeroPrefix(sec, 2)
+      
+      this.allring[currentTime.getDay()] = this.timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
     }
 
     this.interval = setInterval(() => {
@@ -236,6 +290,27 @@ export default {
             this.zeroPrefix(hour, 2) + ":" +
             this.zeroPrefix(min, 2) + ":" +
             this.zeroPrefix(sec, 2)
+
+            
+            this.allring[currentTime.getDay()] = this.timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
+
+          if (this.timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0) == 18000) {
+            this.$store.commit('GoalTimer/setGoalTimer', {
+              timeDay: this.timer.timeDay,
+
+              timeBegan: this.timer.timeBegan,
+              timeStopped: this.timer.timeStopped,
+
+              stoppedDuration: this.timer.stoppedDuration,
+              running: this.timer.running
+            })
+            this.$store.commit('GoalTimer/saveTimerHistory', {
+              timeDay: this.timer.timeDay,
+
+              time: this.timer.time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
+            })
+            this.$store.commit('GoalTimer/recheckStreak')
+          }
         }
       }
 
@@ -339,7 +414,7 @@ export default {
   transform-origin: var(--dayringprogressbar-half-size) var(--dayringprogressbar-half-size);
   stroke-dasharray: var(--dayringprogressbar-dash) calc(var(--dayringprogressbar-circumference) - var(--dayringprogressbar-dash));
   transition: stroke-dasharray 0.3s linear 0s;
-  stroke: #FFD600;
+  
 }
 
 .goals-dayringlabel {
@@ -378,7 +453,6 @@ export default {
   transform-origin: var(--dayringprogressbar-half-size) var(--dayringprogressbar-half-size);
   stroke-dasharray: var(--dayringprogressbar-dash) calc(var(--dayringprogressbar-circumference) - var(--dayringprogressbar-dash));
   transition: stroke-dasharray 0.3s linear 0s;
-  stroke: #FFD600;
 }
 
 .goals-todayring {
@@ -428,6 +502,7 @@ export default {
   color: #FFFFFF;
   line-height: 48px;
   box-shadow: #0003 0px 3px 1px -2px;
+  cursor: pointer;
 }
 .goals-isrunning {
   background-color: #e8ebee;
@@ -454,6 +529,11 @@ export default {
   font-family: "Prompt", sans-serif;
   color: #484C52;
   line-height: 20px
+}
+
+.goals-bottom {
+  height: 50px;
+  width: 100%;
 }
 </style>
   

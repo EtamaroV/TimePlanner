@@ -171,6 +171,17 @@ const GoalTimer = {
       
       stoppedDuration: 0,
       running: false
+    },
+    streak: 0,
+
+    allring: {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0
     }
   },
   mutations: {
@@ -234,8 +245,84 @@ const GoalTimer = {
         
 			} 
 
+      // CHECK STREAK
+      const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.table(timehistorysort)
+
+      let streak = 0;
+      for (let i = 0; i < timehistorysort.length - 1; i++) {
+        //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+        const currentDate = new Date(timehistorysort[i].date);
+        const nextDate = new Date(timehistorysort[i + 1].date);
+
+        const diffTime = Math.abs(nextDate - currentDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+            //console.log(`${timehistorysort[i].date} - notcontinue`)
+            break
+        } else {
+          streak++
+        }
+      }
+      if (timehistorysort[0].time >= 18000) {
+        streak++
+      }
+      console.log(streak)
+      state.streak = streak
+
+      // CHECK ALLRINGS
+      const todayday = new Date();
+      for (let i = 0; i < todayday.getDay(); i++) {
+
+        const todaytomakeolddate = new Date(todayday);
+        todaytomakeolddate.setDate(todaytomakeolddate.getDate() - (todayday.getDay() - i));
+
+        const dateInTEXT = `${String(todaytomakeolddate.getFullYear())}-${String(todaytomakeolddate.getMonth()+1).padStart(2, '0')}-${String(todaytomakeolddate.getDate()).padStart(2, '0')}`
+
+        if (state.timerhistory.find(({ date }) => date === dateInTEXT)) {
+          console.log(`${state.timerhistory.find(({ date }) => date === dateInTEXT).time} - ${state.timerhistory.find(({ date }) => date === dateInTEXT).date} - ${i}`)
+
+          state.allring[i] = state.timerhistory.find(({ date }) => date === dateInTEXT).time
+        }
+
+      }
+
+      console.table(state.allring)
+
+
 
 		},
+    recheckStreak(state) {
+      const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.table(timehistorysort)
+
+      let streak = 0;
+      for (let i = 0; i < timehistorysort.length - 1; i++) {
+        //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+        const currentDate = new Date(timehistorysort[i].date);
+        const nextDate = new Date(timehistorysort[i + 1].date);
+
+        // Calculate the difference in days between current and next date
+        const diffTime = Math.abs(nextDate - currentDate);
+        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+        
+
+        // If the difference is not exactly 1, the sequence is not continuous
+        if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+            //console.log(`${timehistorysort[i].date} - notcontinue`)
+            break
+        } else {
+          streak++
+        }
+      }
+      if (timehistorysort[0].time >= 18000) {
+        streak++
+      }
+      console.log(streak)
+      state.streak = streak
+    },
     setGoalTimer(state, payload) {
       state.timer.timeDay = payload.timeDay
       state.timer.timeBegan = payload.timeBegan
