@@ -25,7 +25,7 @@ const addschedule = {
         state.subjectExist = payload
       },
       setSubject(state, payload) {
-        state.subject.id = payload.id;
+        state.subject.id = payload.id;  
         state.subject.name = payload.name;
         state.subject.description.room = payload.description.room;
         state.subject.description.code = payload.description.code;
@@ -192,6 +192,12 @@ const GoalTimer = {
         state.timerhistory = GoalTimerstoredData
       }
 
+      const YESTERDAY = new Date()
+      YESTERDAY.setUTCDate(YESTERDAY.getUTCDate() - 1);
+      YESTERDAY.setHours(0)
+      YESTERDAY.setMinutes(0)
+      YESTERDAY.setSeconds(0)
+
 			if(localStorage.getItem('GoalTimer')) {
 
         const storedData = JSON.parse(localStorage.getItem('GoalTimer'))
@@ -203,7 +209,7 @@ const GoalTimer = {
           state.timer.timeStopped = storedData.timeStopped === null ? null : new Date(storedData.timeStopped)
           state.timer.stoppedDuration = storedData.stoppedDuration
           state.timer.running = storedData.running
-        } else {
+        } else if (storedData.timeDay === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth()+1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
 
           const zeroPrefix = (num, digit) => {
             var zero = '';
@@ -250,25 +256,53 @@ const GoalTimer = {
       console.table(timehistorysort)
 
       let streak = 0;
-      for (let i = 0; i < timehistorysort.length - 1; i++) {
-        //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
-        const currentDate = new Date(timehistorysort[i].date);
-        const nextDate = new Date(timehistorysort[i + 1].date);
+      if (timehistorysort.length > 0) {
+        if (timehistorysort[0].date === `${String(new Date().getFullYear())}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+          for (let i = 0; i < timehistorysort.length - 1; i++) {
+            if (timehistorysort[i].date)
+              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+            const currentDate = new Date(timehistorysort[i].date);
+            const nextDate = new Date(timehistorysort[i + 1].date);
 
-        const diffTime = Math.abs(nextDate - currentDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+            const diffTime = Math.abs(nextDate - currentDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
-            //console.log(`${timehistorysort[i].date} - notcontinue`)
-            break
-        } else {
-          streak++
+            if (diffDays !== 1 || timehistorysort[i + 1].time < 18000) {
+              console.log(`${timehistorysort[i].date} - notcontinue`)
+              break
+            } else {
+              streak++
+            }
+          }
+          if (timehistorysort[0].time >= 18000) {
+            streak++
+          }
+        } else if (timehistorysort[0].date === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth() + 1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
+          if (timehistorysort[0].time >= 18000) {
+            for (let i = 0; i < timehistorysort.length - 1; i++) {
+              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+              const currentDate = new Date(timehistorysort[i].date);
+              const nextDate = new Date(timehistorysort[i + 1].date);
+
+              const diffTime = Math.abs(nextDate - currentDate);
+              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+              if (diffDays !== 1 || timehistorysort[i + 1].time < 18000) {
+                console.log(`${timehistorysort[i].date} - notcontinue`)
+                break
+              } else {
+                streak++
+              }
+              if (timehistorysort[0].time >= 18000) {
+                streak++
+              }
+            }
+          } else {
+            streak = 0
+          }
         }
+        console.log(streak)
       }
-      if (timehistorysort[0].time >= 18000) {
-        streak++
-      }
-      console.log(streak)
       state.streak = streak
 
       // CHECK ALLRINGS
@@ -294,31 +328,56 @@ const GoalTimer = {
 
 		},
     recheckStreak(state) {
+      // CHECK STREAK
       const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
       console.table(timehistorysort)
 
+      
+
       let streak = 0;
-      for (let i = 0; i < timehistorysort.length - 1; i++) {
-        //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
-        const currentDate = new Date(timehistorysort[i].date);
-        const nextDate = new Date(timehistorysort[i + 1].date);
+      if (timehistorysort[0].date === `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+        for (let i = 0; i < timehistorysort.length - 1; i++) {
+          if (timehistorysort[i].date )
+          console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+          const currentDate = new Date(timehistorysort[i].date);
+          const nextDate = new Date(timehistorysort[i + 1].date);
 
-        // Calculate the difference in days between current and next date
-        const diffTime = Math.abs(nextDate - currentDate);
-        const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+          const diffTime = Math.abs(nextDate - currentDate);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
-        
-
-        // If the difference is not exactly 1, the sequence is not continuous
-        if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
-            //console.log(`${timehistorysort[i].date} - notcontinue`)
-            break
-        } else {
+          if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+              console.log(`${timehistorysort[i].date} - notcontinue`)
+              break
+          } else {
+            streak++
+          }
+        }
+        if (timehistorysort[0].time >= 18000) {
           streak++
         }
-      }
-      if (timehistorysort[0].time >= 18000) {
-        streak++
+      } else if (timehistorysort[0].date === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth()+1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
+        if (timehistorysort[0].time >= 18000) {
+          for (let i = 0; i < timehistorysort.length - 1; i++) {
+            console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+            const currentDate = new Date(timehistorysort[i].date);
+            const nextDate = new Date(timehistorysort[i + 1].date);
+
+            const diffTime = Math.abs(nextDate - currentDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+                console.log(`${timehistorysort[i].date} - notcontinue`)
+                break
+            } else {
+              streak++
+            }
+            if (timehistorysort[0].time >= 18000) {
+              streak++
+            }
+          }
+        } else {
+          streak = 0
+        }
       }
       console.log(streak)
       state.streak = streak

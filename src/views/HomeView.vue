@@ -296,7 +296,6 @@ export default {
     align-items: center;
     justify-content: space-between;
     flex: 1;
-    
 }
 .datelabel-home {
     font-size: 42px;

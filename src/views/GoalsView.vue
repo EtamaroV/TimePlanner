@@ -178,18 +178,33 @@ export default {
                 label: 'Sales',
                 data: [13, 4.5, 3, 4, 2, 0, 1],
 
-                borderWidth: 1
+                borderWidth: 1,
+                borderRadius: {
+                  topLeft: 15,
+                  topRight: 15
+                }
             }
         ]
       },
       options: {
+        interaction: false,
+        
 
         plugins: {
-          legend: false
+          legend: false,
+          tooltip: {
+            enabled: false
+          }
         },
         responsive: true,
         maintainAspectRatio: true,
-        
+        scales: {
+         y: {
+            ticks: {
+              callback: value => `${value}h`
+            }
+         } 
+        }
       }
     };
   },
