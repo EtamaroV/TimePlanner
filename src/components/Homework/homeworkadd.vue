@@ -1,5 +1,6 @@
 <script setup>
 import { ref } from "vue";
+import Editor from 'primevue/editor';
 
 import { useStore } from 'vuex'
 
@@ -22,25 +23,26 @@ const store = useStore()
         <div class="flex-auto">
             <label for="buttondisplay" class="font-bold block mb-2"> ใส่วันที่กำหนดส่ง </label>
             <Calendar v-model="buttondisplay" showIcon :showOnFocus="false" inputId="buttondisplay" />
-        </div>
-        <div class="flex-auto">
+            <br>
             <label for="username">ใส่ชื่อวิชา</label>
                 <InputText id="username" v-model="value" />
-        </div>
-        <div class="flex-auto">
-            <label for="username">ใส่ชื่องาน</label>
+            <br>
+            <br> <label for="username">ใส่ชื่องาน</label>
                 <InputText id="username" v-model="value" />
         </div>
-        <div class="flex-auto">
-            <label for="username">ใส่ลายละเอียด</label>
-                <InputText id="username" v-model="value" />
-                
-        </div>
-        <div class="card flex justify-content-center">
-        <Button label="Submit" />
+    </div>
+       
+    <div>
+        <br>
+        <label for="username">ใส่ลายละเอียด</label>
+        <Editor v-model="value" editorStyle="height: 320px" />
     </div>
         
+    <div class="card flex flex-wrap gap-3 p-fluid">
+        <div class="flex-auto">
+        <br><Button label="เพิ่มการบ้าน" />
         </div>
+    </div>
       
 </template>
 
