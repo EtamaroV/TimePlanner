@@ -8,11 +8,15 @@ import router from './router'
 import store from './store'
 
 import PrimeVue from 'primevue/config';
+import ConfirmationService from 'primevue/confirmationservice';
+import Ripple from 'primevue/ripple';
 
 const app = createApp(App)
 
 app.use(router)
-app.use(PrimeVue);
+app.use(PrimeVue, { ripple: true });
+app.use(ConfirmationService);
+app.directive('ripple', Ripple);
 
 app.use(store)
 

@@ -25,7 +25,7 @@ const addschedule = {
         state.subjectExist = payload
       },
       setSubject(state, payload) {
-        state.subject.id = payload.id;
+        state.subject.id = payload.id;  
         state.subject.name = payload.name;
         state.subject.description.room = payload.description.room;
         state.subject.description.code = payload.description.code;
@@ -68,6 +68,7 @@ const SubjectList = {
 
         state.splice(0, state.length, ...storedData);
         //console.log(state)
+        state.push({"id":"TEST001","name":"Test555","description":{"room":"123","code":"55555","teacher":"TEACHERTEST  EIEI"},"color":"#f8b28c"})
 			}
 		},
 
@@ -83,32 +84,327 @@ const SubjectList = {
 const ScheduleList = {
   namespaced: true,
   state: {
-    0: [],
-    1: [
-      {
-        id: 'TEST001',
-        startPeriod: 0,
-        endPeriod: 1
-      },
+    0: [
+      
     ],
-    2: [],
-    3: [],
-    4: [],
-    5: [],
-    6: []
+    1: [
+
+    ],
+    2: [
+
+    ],
+    3: [
+
+    ],
+    4: [
+
+    ],
+    5: [
+
+    ],
+    6: [
+
+    ]
   },
   mutations: {
+    initialiseScheduleList(state) {
+			// Check if the ID exists
+			if(localStorage.getItem('ScheduleList')) {
+
+        const storedData = JSON.parse(localStorage.getItem('ScheduleList'))
+
+        for (let x in storedData) {
+          if (storedData[x].length > 1) {
+            storedData[x].sort((a, b) => {
+              const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+              const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+              return timeA - timeB;
+            });
+          }
+          state[x] = storedData[x]
+        }
+
+			}
+		},
     addSchedulePeriod(state, payload) {
       state[payload.day].push(payload.detail)
-      //console.log(state)
+
+      for (let i in state) {
+        if (state[i].length > 1) {
+          state[i].sort((a, b) => {
+            const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+            const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+            return timeA - timeB;
+          });
+        }
+      }
+
+      localStorage.setItem('ScheduleList', JSON.stringify(state));
     },
-    setLocalStorage(state, payload) {
-        state.subject.name = payload;
+    removeSchedule(state, payload) {
+      state[payload.day].splice(payload.index, 1)
+
+      for (let i in state) {
+        if (state[i].length > 1) {
+          state[i].sort((a, b) => {
+            const timeA = new Date(`1970-01-01T${a.startPeriod}:00`);
+            const timeB = new Date(`1970-01-01T${b.startPeriod}:00`);
+            return timeA - timeB;
+          });
+        }
+      }
+
+      localStorage.setItem('ScheduleList', JSON.stringify(state));
     },
   },
 }
 
+const GoalTimer = {
+  namespaced: true,
+  state: {
+    timerhistory: [],
+    timer: {
+      timeDay: `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`,
+      
+      timeBegan: null,
+      timeStopped: null,
+      
+      stoppedDuration: 0,
+      running: false
+    },
+    streak: 0,
 
+    allring: {
+      0: 0,
+      1: 0,
+      2: 0,
+      3: 0,
+      4: 0,
+      5: 0,
+      6: 0
+    }
+  },
+  mutations: {
+    initialiseGoalTimer(state) {
+			// Check if the ID exists
+      if(localStorage.getItem('TimerHistory')) {
+        const GoalTimerstoredData = JSON.parse(localStorage.getItem('TimerHistory'))
+        state.timerhistory = GoalTimerstoredData
+      }
+
+      const YESTERDAY = new Date()
+      YESTERDAY.setUTCDate(YESTERDAY.getUTCDate() - 1);
+      YESTERDAY.setHours(0)
+      YESTERDAY.setMinutes(0)
+      YESTERDAY.setSeconds(0)
+
+			if(localStorage.getItem('GoalTimer')) {
+
+        const storedData = JSON.parse(localStorage.getItem('GoalTimer'))
+
+        state.timer.timeDay = storedData.timeDay
+
+        if (storedData.timeDay === `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+          state.timer.timeBegan = new Date(storedData.timeBegan)
+          state.timer.timeStopped = storedData.timeStopped === null ? null : new Date(storedData.timeStopped)
+          state.timer.stoppedDuration = storedData.stoppedDuration
+          state.timer.running = storedData.running
+        } else if (storedData.timeDay === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth()+1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
+
+          const zeroPrefix = (num, digit) => {
+            var zero = '';
+            for (var i = 0; i < digit; i++) {
+              zero += '0';
+            }
+            return (zero + num).slice(-digit);
+          }
+          
+          if (storedData.running) {
+            var currentTime = new Date(storedData.timeBegan)
+            currentTime.setUTCDate(currentTime.getUTCDate() + 1);
+            currentTime.setHours(0)
+            currentTime.setMinutes(0)
+            currentTime.setSeconds(0)
+            
+            var timeElapsed = new Date(currentTime - new Date(storedData.timeBegan) - storedData.stoppedDuration)
+            , hour = timeElapsed.getUTCHours()
+            , min = timeElapsed.getUTCMinutes()
+            , sec = timeElapsed.getUTCSeconds()
+            , ms = timeElapsed.getUTCMilliseconds();
+
+            const time =
+              zeroPrefix(hour, 2) + ":" +
+              zeroPrefix(min, 2) + ":" +
+              zeroPrefix(sec, 2)
+
+            if (state.timerhistory.find(({ date }) => date === storedData.timeDay)) {
+              state.timerhistory.find(({ date }) => date === storedData.timeDay).time = time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)
+            } else {
+              state.timerhistory.push({date: storedData.timeDay, time: time.split(':').reduce((acc, time, index) => acc + (+time) * (60 ** (2 - index)), 0)})
+            }
+
+          }
+
+        }
+
+        
+        
+			} 
+
+      // CHECK STREAK
+      const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.table(timehistorysort)
+
+      let streak = 0;
+      if (timehistorysort.length > 0) {
+        if (timehistorysort[0].date === `${String(new Date().getFullYear())}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+          for (let i = 0; i < timehistorysort.length - 1; i++) {
+            if (timehistorysort[i].date)
+              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+            const currentDate = new Date(timehistorysort[i].date);
+            const nextDate = new Date(timehistorysort[i + 1].date);
+
+            const diffTime = Math.abs(nextDate - currentDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays !== 1 || timehistorysort[i + 1].time < 18000) {
+              console.log(`${timehistorysort[i].date} - notcontinue`)
+              break
+            } else {
+              streak++
+            }
+          }
+          if (timehistorysort[0].time >= 18000) {
+            streak++
+          }
+        } else if (timehistorysort[0].date === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth() + 1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
+          if (timehistorysort[0].time >= 18000) {
+            for (let i = 0; i < timehistorysort.length - 1; i++) {
+              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+              const currentDate = new Date(timehistorysort[i].date);
+              const nextDate = new Date(timehistorysort[i + 1].date);
+
+              const diffTime = Math.abs(nextDate - currentDate);
+              const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+              if (diffDays !== 1 || timehistorysort[i + 1].time < 18000) {
+                console.log(`${timehistorysort[i].date} - notcontinue`)
+                break
+              } else {
+                streak++
+              }
+              if (timehistorysort[0].time >= 18000) {
+                streak++
+              }
+            }
+          } else {
+            streak = 0
+          }
+        }
+        console.log(streak)
+      }
+      state.streak = streak
+
+      // CHECK ALLRINGS
+      const todayday = new Date();
+      for (let i = 0; i < todayday.getDay(); i++) {
+
+        const todaytomakeolddate = new Date(todayday);
+        todaytomakeolddate.setDate(todaytomakeolddate.getDate() - (todayday.getDay() - i));
+
+        const dateInTEXT = `${String(todaytomakeolddate.getFullYear())}-${String(todaytomakeolddate.getMonth()+1).padStart(2, '0')}-${String(todaytomakeolddate.getDate()).padStart(2, '0')}`
+
+        if (state.timerhistory.find(({ date }) => date === dateInTEXT)) {
+          console.log(`${state.timerhistory.find(({ date }) => date === dateInTEXT).time} - ${state.timerhistory.find(({ date }) => date === dateInTEXT).date} - ${i}`)
+
+          state.allring[i] = state.timerhistory.find(({ date }) => date === dateInTEXT).time
+        }
+
+      }
+
+      console.table(state.allring)
+
+
+
+		},
+    recheckStreak(state) {
+      // CHECK STREAK
+      const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
+      console.table(timehistorysort)
+
+      
+
+      let streak = 0;
+      if (timehistorysort[0].date === `${String(new Date().getFullYear())}-${String(new Date().getMonth()+1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
+        for (let i = 0; i < timehistorysort.length - 1; i++) {
+          if (timehistorysort[i].date )
+          console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+          const currentDate = new Date(timehistorysort[i].date);
+          const nextDate = new Date(timehistorysort[i + 1].date);
+
+          const diffTime = Math.abs(nextDate - currentDate);
+          const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+          if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+              console.log(`${timehistorysort[i].date} - notcontinue`)
+              break
+          } else {
+            streak++
+          }
+        }
+        if (timehistorysort[0].time >= 18000) {
+          streak++
+        }
+      } else if (timehistorysort[0].date === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth()+1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
+        if (timehistorysort[0].time >= 18000) {
+          for (let i = 0; i < timehistorysort.length - 1; i++) {
+            console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+            const currentDate = new Date(timehistorysort[i].date);
+            const nextDate = new Date(timehistorysort[i + 1].date);
+
+            const diffTime = Math.abs(nextDate - currentDate);
+            const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
+
+            if (diffDays !== 1 || timehistorysort[i+1].time < 18000) {
+                console.log(`${timehistorysort[i].date} - notcontinue`)
+                break
+            } else {
+              streak++
+            }
+            if (timehistorysort[0].time >= 18000) {
+              streak++
+            }
+          }
+        } else {
+          streak = 0
+        }
+      }
+      console.log(streak)
+      state.streak = streak
+    },
+    setGoalTimer(state, payload) {
+      state.timer.timeDay = payload.timeDay
+      state.timer.timeBegan = payload.timeBegan
+      state.timer.timeStopped = payload.timeStopped
+      state.timer.stoppedDuration = payload.stoppedDuration
+      state.timer.running = payload.running
+
+      localStorage.setItem('GoalTimer', JSON.stringify(state.timer));
+    },
+    saveTimerHistory(state, payload) {
+
+
+      if (state.timerhistory.find(({ date }) => date === payload.timeDay)) {
+        state.timerhistory.find(({ date }) => date === payload.timeDay).time = payload.time
+      } else {
+        state.timerhistory.push({date: payload.timeDay, time: payload.time})
+      }
+
+
+      localStorage.setItem('TimerHistory', JSON.stringify(state.timerhistory));
+    },
+  },
+}
 
 
 
@@ -124,6 +420,9 @@ export default new Vuex.Store({
   modules: {
     addschedule,
     SubjectList,
-    ScheduleList
+    
+    ScheduleList,
+
+    GoalTimer
   }
 })

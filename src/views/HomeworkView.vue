@@ -4,98 +4,270 @@ import { ref } from 'vue';
 
 const router = useRouter()
 
-
-const showBar = ref(false);
-const textInput1 = ref('');
-const textInput2 = ref('');
-const textInput3 = ref('');
-const textInput4 = ref('');
-
-function toggleBar() {
-  showBar.value = !showBar.value;
-}
-
-function submitForm() {
-  console.log("Form submitted");
-}
 </script>
 
 <template>
   <router-view v-slot="{ Component }">
-  <transition name="slide" mode="out-in">
-    <component :is="Component" />
-  </transition>
-</router-view>
-  <div>
-    
+    <transition name="slide" mode="out-in">
+      <component :is="Component" />
+    </transition>
+  </router-view>
 
-    <button class="add-button larger-button" @click="router.push({ path: '/homework/add' })">+</button>
-    
-    
-    <p class="larger-text">การบ้าน</p>
+  <div class="homework-main">
+    <div class="homework-header">
+      <div class="homework-headerlabel">การบ้าน</div>
+      <div class="topbtnzone-home">
+
+        <div class="homework-deletebtn" @click="binmode = !binmode">
+          <svg height="100%" viewBox="0 0 18 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M15.4225 7.36685C15.6154 7.36685 15.7905 7.46255 15.9288 7.62424C16.0577 7.79694 16.1227 8.01144 16.1038 8.23804C16.1038 8.31284 15.5881 15.7268 15.2936 18.8474C15.1092 20.7625 14.0232 21.9252 12.3943 21.9571C11.1418 21.989 9.91747 22 8.712 22C7.4322 22 6.18062 21.989 4.96574 21.9571C3.39139 21.9142 2.3045 20.7306 2.12947 18.8474C1.82645 15.7158 1.32018 8.31284 1.31077 8.23804C1.30136 8.01144 1.36535 7.79694 1.49521 7.62424C1.62319 7.46255 1.80763 7.36685 2.00149 7.36685H15.4225ZM10.7061 0C11.5615 0 12.3257 0.678693 12.5468 1.64668L12.7049 2.44968C12.8329 3.10417 13.3316 3.56726 13.9057 3.56726H16.7269C17.1033 3.56726 17.4167 3.92256 17.4167 4.37466V4.79265C17.4167 5.23375 17.1033 5.60004 16.7269 5.60004H0.690719C0.313364 5.60004 0 5.23375 0 4.79265V4.37466C0 3.92256 0.313364 3.56726 0.690719 3.56726H3.51194C4.08503 3.56726 4.58378 3.10417 4.7127 2.45078L4.86044 1.70058C5.09006 0.678693 5.84571 0 6.71052 0H10.7061Z"
+              fill="#484C52" />
+          </svg>
+        </div>
+
+        <RouterLink class="homework-addbtn" to="homework/add">
+          <svg height="100%" viewBox="0 0 22 22" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M12.6923 1.69231C12.6923 0.75625 11.9361 0 11 0C10.0639 0 9.30769 0.75625 9.30769 1.69231V9.30769H1.69231C0.75625 9.30769 0 10.0639 0 11C0 11.9361 0.75625 12.6923 1.69231 12.6923H9.30769V20.3077C9.30769 21.2437 10.0639 22 11 22C11.9361 22 12.6923 21.2437 12.6923 20.3077V12.6923H20.3077C21.2437 12.6923 22 11.9361 22 11C22 10.0639 21.2437 9.30769 20.3077 9.30769H12.6923V1.69231Z"
+              fill="#484C52" />
+          </svg>
+        </RouterLink>
+
+      </div>
+    </div>
+
+    <div class="homework-content">
+      <div class="homework-datelabel">4 เม.ย. 2567</div>
+
+      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 1 }">
+        <div class="homework-cardtop">
+          <div class="homework-cardtopleft">
+            <div class="homework-name">การบ้าน 1</div>
+            <div class="homework-subject">ภาษาไทย</div>
+          </div>
+          <div class="homework-cardtopright">
+            <button class="homework-cardmorebtn" @click="opencard(1)">
+              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            
+          </div>
+        </div>
+        <div class="homework-cardmore">
+          <div class="homework-descriptiontitle">รายละเอียด</div>
+          <div class="homework-description">asdasdasddddasdasd</div>
+        </div>
+      </div>
+
+      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 2 }">
+        <div class="homework-cardtop">
+          <div class="homework-cardtopleft">
+            <div class="homework-name">การบ้าน 2</div>
+            <div class="homework-subject">ภาษาไทย</div>
+          </div>
+          <div class="homework-cardtopright">
+            <button class="homework-cardmorebtn" @click="opencard(2)">
+              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            
+          </div>
+        </div>
+        <div class="homework-cardmore">
+          <div class="homework-descriptiontitle">รายละเอียด</div>
+          <div class="homework-description">asdasdasddddasdasd</div>
+        </div>
+      </div>
+
+      <div class="homework-datelabel">5 เม.ย. 2567</div>
+
+      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 3 }">
+        <div class="homework-cardtop">
+          <div class="homework-cardtopleft">
+            <div class="homework-name">การบ้าน 3</div>
+            <div class="homework-subject">ภาษาไทย</div>
+          </div>
+          <div class="homework-cardtopright">
+            <button class="homework-cardmorebtn" @click="opencard(3)">
+              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            
+          </div>
+        </div>
+        <div class="homework-cardmore">
+          <div class="homework-descriptiontitle">รายละเอียด</div>
+          <div class="homework-description">asdasdasddddasdasd</div>
+        </div>
+      </div>
+
+      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 4 }">
+        <div class="homework-cardtop">
+          <div class="homework-cardtopleft">
+            <div class="homework-name">การบ้าน 4</div>
+            <div class="homework-subject">ภาษาไทย</div>
+          </div>
+          <div class="homework-cardtopright">
+            <button class="homework-cardmorebtn" @click="opencard(4)">
+              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round" />
+              </svg>
+            </button>
+            
+          </div>
+        </div>
+        <div class="homework-cardmore">
+          <div class="homework-descriptiontitle">รายละเอียด</div>
+          <div class="homework-description">asdasdasddddasdasd</div>
+        </div>
+      </div>
+
+    </div>
+
   </div>
-  
+
 </template>
 
+<script scoped>
+export default {
+  data() {
+    return {
+      opencard_num: null
+    }
+  },
+  beforeDestroy() {
+
+  },
+  created() {
+  },
+  methods: {
+    opencard(no) {
+      if (no === this.opencard_num) {
+        this.opencard_num = null
+      } else {
+        this.opencard_num = no
+      }
+    }
+  }
+};
+</script>
+
 <style>
-.larger-text {
-  font-size: 55px;
-  top: 60px; 
-}
-
-.add-button {
-  position: absolute ;
-  top: 100px;
-  right: 10px;
-  padding: 20px;
-  font-size:20px;
-}
-
-.black-bar {
-  position: absolute;
-  bottom: 0;
-  right: 0;
+.homework-main {
   width: 100%;
-  max-width: 10000px; 
-  height: 350px;
-  background-color: #000; 
-  padding: 20px;
-  overflow-y: auto;
-}
-
-.row {
   display: flex;
-  justify-content: center;
-  margin-bottom: 10px;
+  flex-direction: column;
+}
+.homework-header {
+  padding: 10px 10px 0 10px;
+
+  width: 100%;
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  justify-content: space-between;
+  flex: 1;
+  
+  top: env(safe-area-inset-top);
+  position: sticky;
+}
+.homework-headerlabel {
+    font-size: 36px;
+    font-weight: 500;
+    font-family: "Prompt", sans-serif;
+
+}
+.homework-deletebtn {
+    height: 22px;
+}
+.homework-addbtn {
+    height: 22px;
 }
 
-.text-container {
-  width: 80%; 
-  margin: 0 auto;
+.homework-content {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
 }
-
-.text-input {
-  width: 100%; 
-  padding: 10px;
+.homework-datelabel {
+  padding: 0 10px;
   font-size: 18px;
+  font-weight: 300;
+  font-family: "Prompt", sans-serif;
+  color: #000000;
+  opacity: 70%;
+}
+.homework-datelabel:not(:first-child) {
+  margin-top: 15px;
+}
+
+.homework-card {
+  display: flex;
+  flex-direction: column;
+  background-color: #DBEEFF;
+  padding: 7px 14px 5px 14px;
+  border-radius: 9px;
+  
+}
+.homework-cardtop {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+
+}
+.homework-name {
+  font-size: 18px;
+  font-weight: 400;
+  font-family: "Prompt", sans-serif;
+}
+.homework-subject {
+  font-size: 16px;
+  font-weight: 300;
+  font-family: "Prompt", sans-serif;
+  margin-top: -5px;
+  opacity: 80%;
+}
+.homework-cardmore {
+  max-height: 0;
+
+  overflow:hidden;
+  transition: max-height 0.25s ease;
+}
+.homework-card-active .homework-cardmore {
+
+  max-height: 60px;
+
+}
+.homework-cardmorebtn {
+  transform: rotate(0deg);
+  transition: transform 0.15s ease;
+
+  outline: none;
   border: none;
-  border-radius: 5px;
-  background-color: #333;
-  color: #fff;
-}
+  cursor: pointer;
+  background-color: transparent;
+  
 
-.submitted-values {
-  padding: 20px;
-  margin-bottom: 20px;
-  width: auto;
-  background-color: #f0f0f0;
-  border-radius: 20px;
-  position: fixed;
-  top: 15%;
-}
+  width: 30px;
+  height: 30px;
+  padding: 0 6px;
+  border-radius: 100%;
+  align-items: center;
 
-.submitted-value {
-  font-size: 18px;
-  margin-bottom: 10px;
+  display: flex;
+  align-items: center;
+}
+.homework-card-active .homework-cardmorebtn {
+  transform: rotate(180deg);
+  
 }
 </style>

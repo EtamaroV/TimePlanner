@@ -76,6 +76,8 @@ const getContrast = (hexcolor) => {
                     <InputText v-model="subject.description.teacher" autocapitalize="off" autocomplete="off" autocorrect="off"/>
                 </div>
 
+                <Button class="colorSelectBtn-homeadd" label="เลือกสี" @click="storeDetail();router.push({ path: '/add/color' });" outlined :style="{backgroundColor: store.state.addschedule.color, borderColor: store.state.addschedule.color, color: getContrast(store.state.addschedule.color)}"/>
+
             </div>
 
             <Divider />
@@ -90,19 +92,16 @@ const getContrast = (hexcolor) => {
                 </div>
                 <div class="inputgroup-homeadd">
                     <label>จบคาบ</label>
-                    <InputText type="time" v-model="timePeriod.endPeriod" :defaultValue="new Date(new Date().getTime()+3600000).toTimeString().slice(0, 5)"/>
+                    <InputText type="time" :min="timePeriod.startPeriod" v-model="timePeriod.endPeriod" :defaultValue="new Date(new Date().getTime()+3600000).toTimeString().slice(0, 5)" :invalid="new Date(`1970-01-01T${timePeriod.startPeriod}:00`) >= new Date(`1970-01-01T${timePeriod.endPeriod}:00`)"/>
+                    <small style="color: red;" v-if="new Date(`1970-01-01T${timePeriod.startPeriod}:00`) >= new Date(`1970-01-01T${timePeriod.endPeriod}:00`)">เวลาจบคาบต้องมากกว่าเวลาเริ่มคาบ</small>
                 </div>
+                
 
-                <Divider />
-
-                <Button class="colorSelectBtn-homeadd" label="เลือกสี" @click="storeDetail();router.push({ path: '/add/color' });" outlined :style="{backgroundColor: store.state.addschedule.color, borderColor: store.state.addschedule.color, color: getContrast(store.state.addschedule.color)}"/>
             </div>
-
-            
 
             <br>
 
-            <Button label="เพิ่มคาบเรียน" @click="storeDetail();addSubject();" :disabled="disabledSubmitBtn || (store.state.addschedule.color == null)"/>
+            <Button label="เพิ่มคาบเรียน" @click="storeDetail();addSubject();" :disabled="(disabledSubmitBtn || ((store.state.addschedule.color == null) && !subjectExistswitchValue)) || new Date(`1970-01-01T${timePeriod.startPeriod}:00`) >= new Date(`1970-01-01T${timePeriod.endPeriod}:00`)"/>
         </div>
     </div>
 

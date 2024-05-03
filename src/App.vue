@@ -48,6 +48,10 @@ preventBrowserHistorySwipeGestures();
 export default {
   beforeCreate() {
 		this.$store.commit('SubjectList/initialiseSubjectList');
+
+    this.$store.commit('ScheduleList/initialiseScheduleList');
+
+    this.$store.commit('GoalTimer/initialiseGoalTimer');
 	}
 }
 </script>

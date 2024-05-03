@@ -16,8 +16,8 @@ export default defineConfig({
         enabled: true
       },
       manifest: { //https://favicon.inbrowser.app/tools/favicon-generator
-        "name": "NSC APP",
-        "short_name": "NSC APP",
+        "name": "TimePlanner",
+        "short_name": "TimePlanner",
         "icons": [
           {
             "src": "/pwa-192x192.png",
