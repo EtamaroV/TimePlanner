@@ -59,6 +59,10 @@ const store = useStore()
                             <button class="ql-strike"></button>
                         </span>
                         <span class="ql-formats">
+                          <button class="ql-script" value="sub"></button>
+                          <button class="ql-script" value="super"></button>
+                        </span>
+                        <span class="ql-formats">
                             <button class="ql-blockquote"></button>
                         </span>
                         <span class="ql-formats">
