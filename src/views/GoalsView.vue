@@ -15,7 +15,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[0]}"
+              <circle class="fg" :style="{'stroke': daycolor[0], 'opacity': allring[0]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -28,7 +28,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[1]}"
+              <circle class="fg" :style="{'stroke': daycolor[1], 'opacity': allring[1]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -40,7 +40,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[2]}"
+              <circle class="fg" :style="{'stroke': daycolor[2], 'opacity': allring[2]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -52,7 +52,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[3]}"
+              <circle class="fg" :style="{'stroke': daycolor[3], 'opacity': allring[3]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -64,7 +64,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[4]}"
+              <circle class="fg" :style="{'stroke': daycolor[4], 'opacity': allring[4]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -76,7 +76,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[5]}"
+              <circle class="fg" :style="{'stroke': daycolor[5], 'opacity': allring[5]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>
@@ -88,7 +88,7 @@ const store = useStore()
               <circle class="bg"
                 cx="125" cy="125" r="115" fill="none" stroke="#ddd" stroke-width="20"
               ></circle>
-              <circle class="fg" :style="{'stroke': daycolor[6]}"
+              <circle class="fg" :style="{'stroke': daycolor[6], 'opacity': allring[6]? 1 : 0}"
                 cx="125" cy="125" r="115" fill="none" stroke="#5394fd" stroke-width="20"
               ></circle>
             </svg>

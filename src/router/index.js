@@ -49,7 +49,7 @@ const router = createRouter({
         {
           path: 'add',
           component: Flyouttab,
-          props: { title: "เพิ่มคาบเรียน", close_route: "/homework" },
+          props: { title: "เพิ่มการบ้าน", close_route: "/homework" },
           children: [
             {
               path: '',

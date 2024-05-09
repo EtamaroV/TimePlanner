@@ -1,8 +1,13 @@
 <script setup>
 import { RouterLink, RouterView, useRouter} from 'vue-router'
 import { ref } from 'vue';
+import { useStore } from 'vuex'
+
+import Editor from 'primevue/editor';
+import Button from 'primevue/button';
 
 const router = useRouter()
+const store = useStore()
 
 </script>
 
@@ -38,96 +43,56 @@ const router = useRouter()
     </div>
 
     <div class="homework-content">
-      <div class="homework-datelabel">4 เม.ย. 2567</div>
 
-      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 1 }">
-        <div class="homework-cardtop">
-          <div class="homework-cardtopleft">
-            <div class="homework-name">การบ้าน 1</div>
-            <div class="homework-subject">ภาษาไทย</div>
-          </div>
-          <div class="homework-cardtopright">
-            <button class="homework-cardmorebtn" @click="opencard(1)">
-              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            
-          </div>
-        </div>
-        <div class="homework-cardmore">
-          <div class="homework-descriptiontitle">รายละเอียด</div>
-          <div class="homework-description">asdasdasddddasdasd</div>
-        </div>
-      </div>
+      <div class="homework-dateholder" v-for="hwidarray,date in store.state.HomeworkList.dateseperate" >
 
-      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 2 }">
-        <div class="homework-cardtop">
-          <div class="homework-cardtopleft">
-            <div class="homework-name">การบ้าน 2</div>
-            <div class="homework-subject">ภาษาไทย</div>
-          </div>
-          <div class="homework-cardtopright">
-            <button class="homework-cardmorebtn" @click="opencard(2)">
-              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            
-          </div>
-        </div>
-        <div class="homework-cardmore">
-          <div class="homework-descriptiontitle">รายละเอียด</div>
-          <div class="homework-description">asdasdasddddasdasd</div>
-        </div>
-      </div>
+        <div class="homework-datelabel">{{new Date(date).toLocaleDateString('th-TH', {year: 'numeric',month: 'short',day: 'numeric'})}}</div>
 
-      <div class="homework-datelabel">5 เม.ย. 2567</div>
+        <div class="homework-card" v-for="hwid,index in hwidarray" :class="{ 'homework-card-active': opencard_num === hwid }">
+          <div class="homework-cardtop">
+            <div class="homework-cardtopleft">
+              <div class="homework-name">{{ store.state.HomeworkList.List.find(({ id }) => id === hwid).name }}</div>
+              <div class="homework-subject">{{ store.state.SubjectList.find(({ id }) => id === store.state.HomeworkList.List.find(({ id }) => id === hwid).subjectid).name }}</div>
+            </div>
+            <div class="homework-cardtopright">
+              <button class="homework-cardmorebtn" @click="opencard(hwid)">
+                <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
+                    stroke-linejoin="round" />
+                </svg>
+              </button>
 
-      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 3 }">
-        <div class="homework-cardtop">
-          <div class="homework-cardtopleft">
-            <div class="homework-name">การบ้าน 3</div>
-            <div class="homework-subject">ภาษาไทย</div>
+            </div>
           </div>
-          <div class="homework-cardtopright">
-            <button class="homework-cardmorebtn" @click="opencard(3)">
-              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            
-          </div>
-        </div>
-        <div class="homework-cardmore">
-          <div class="homework-descriptiontitle">รายละเอียด</div>
-          <div class="homework-description">asdasdasddddasdasd</div>
-        </div>
-      </div>
+          <div class="homework-cardmore">
+            <div class="homework-descriptiontitle" v-if="store.state.HomeworkList.List.find(({ id }) => id === hwid).description.trim() !== ''">รายละเอียด</div>
+            <div class="homework-description" v-if="store.state.HomeworkList.List.find(({ id }) => id === hwid).description.trim() !== ''" v-html="store.state.HomeworkList.List.find(({ id }) => id === hwid).description"></div>
 
-      <div class="homework-card" :class="{ 'homework-card-active': opencard_num === 4 }">
-        <div class="homework-cardtop">
-          <div class="homework-cardtopleft">
-            <div class="homework-name">การบ้าน 4</div>
-            <div class="homework-subject">ภาษาไทย</div>
-          </div>
-          <div class="homework-cardtopright">
-            <button class="homework-cardmorebtn" @click="opencard(4)">
-              <svg width="100%" viewBox="0 0 16 9" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.1018 1L8.13672 8L1.17169 1" stroke="#484C52" stroke-width="1.5" stroke-linecap="round"
-                  stroke-linejoin="round" />
-              </svg>
-            </button>
-            
+            <Button v-if="!store.state.HomeworkList.List.find(({ id }) => id === hwid).finish" style="float: right" label="ทำเครื่องหมายว่าเสร็จสิ้น" 
+              @click="finishmark(hwid, true)"
+              :pt="{
+                  root: {
+                      style: {
+                          padding: '0.3rem 0.75rem',
+                          'font-size': '14px'
+                      }
+                  }
+              }"
+            />
+            <Button v-else-if="store.state.HomeworkList.List.find(({ id }) => id === hwid).finish" style="float: right" severity="secondary" label="ยกเลิก" 
+              @click="finishmark(hwid, false)"
+              :pt="{
+                  root: {
+                      style: {
+                          padding: '0.3rem 0.75rem',
+                          'font-size': '14px'
+                      }
+                  }
+              }"
+            />
           </div>
         </div>
-        <div class="homework-cardmore">
-          <div class="homework-descriptiontitle">รายละเอียด</div>
-          <div class="homework-description">asdasdasddddasdasd</div>
-        </div>
+
       </div>
 
     </div>
@@ -140,13 +105,15 @@ const router = useRouter()
 export default {
   data() {
     return {
-      opencard_num: null
+      opencard_num: null,
+      homeworkatdate: null
     }
   },
   beforeDestroy() {
 
   },
   created() {
+ 
   },
   methods: {
     opencard(no) {
@@ -155,6 +122,13 @@ export default {
       } else {
         this.opencard_num = no
       }
+    },
+
+    finishmark(id, isfinish) {
+      this.$store.commit('HomeworkList/setFinish', {
+        id: id,
+        isfinish: isfinish
+      })
     }
   }
 };
@@ -165,6 +139,7 @@ export default {
   width: 100%;
   display: flex;
   flex-direction: column;
+  margin-bottom: calc(60px + env(safe-area-inset-bottom));
 }
 .homework-header {
   padding: 10px 10px 0 10px;
@@ -197,6 +172,15 @@ export default {
   flex-direction: column;
   row-gap: 4px;
 }
+.homework-dateholder {
+  display: flex;
+  flex-direction: column;
+  row-gap: 4px;
+}
+.homework-dateholder:not(:first-child) {
+  margin-top: 15px;
+}
+
 .homework-datelabel {
   padding: 0 10px;
   font-size: 18px;
@@ -204,9 +188,6 @@ export default {
   font-family: "Prompt", sans-serif;
   color: #000000;
   opacity: 70%;
-}
-.homework-datelabel:not(:first-child) {
-  margin-top: 15px;
 }
 
 .homework-card {
@@ -241,10 +222,11 @@ export default {
 
   overflow:hidden;
   transition: max-height 0.25s ease;
+  margin-bottom: 5px;
 }
 .homework-card-active .homework-cardmore {
 
-  max-height: 60px;
+  max-height: none;
 
 }
 .homework-cardmorebtn {
@@ -270,4 +252,65 @@ export default {
   transform: rotate(180deg);
   
 }
+
+
+
+
+
+
+
+
+.homework-description {
+  background-color: white;
+  margin: 5px 0 9px 0;
+  padding: 5px 10px;
+  border-radius: 4px;
+
+  /*box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;*/
+}
+
+.homework-description .ql-size-huge {
+    font-size: 2.5rem;
+}
+
+.homework-description .ql-size-large {
+    font-size: 1.5rem;
+}
+
+.homework-description .ql-size-small {
+    font-size: 0.75rem;
+}
+
+.homework-description blockquote {
+    border-left: 4px solid #ccc;
+    margin-bottom: 5px;
+    margin-top: 5px;
+    padding-left: 16px;
+}
+
+.homework-description .ql-indent-1 {
+    padding-left: 3rem;
+}
+.homework-description .ql-indent-2 {
+    padding-left: 6rem;
+}
+.homework-description .ql-indent-3 {
+    padding-left: 9rem;
+}
+.homework-description .ql-indent-4 {
+    padding-left: 12rem;
+}
+.homework-description .ql-indent-5 {
+    padding-left: 15rem;
+}
+.homework-description .ql-indent-6 {
+    padding-left: 18rem;
+}
+.homework-description .ql-indent-7 {
+    padding-left: 21rem;
+}
+.homework-description .ql-indent-8 {
+    padding-left: 24rem;
+}
+
 </style>

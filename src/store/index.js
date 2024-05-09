@@ -68,7 +68,6 @@ const SubjectList = {
 
         state.splice(0, state.length, ...storedData);
         //console.log(state)
-        state.push({"id":"TEST001","name":"Test555","description":{"room":"123","code":"55555","teacher":"TEACHERTEST  EIEI"},"color":"#f8b28c"})
 			}
 		},
 
@@ -76,6 +75,77 @@ const SubjectList = {
       state.push(payload)
 
       localStorage.setItem('SubjectList', JSON.stringify(state));
+    },
+  },
+}
+
+const HomeworkList = {
+  namespaced: true,
+  state: {
+    dateseperate: [],
+    List: []
+  },
+  mutations: {
+    initialiseHomeworkList(state) {
+			// Check if the ID exists
+			if(localStorage.getItem('HomeworkList')) {
+
+        const storedData = JSON.parse(localStorage.getItem('HomeworkList'))
+
+        storedData.sort((a, b) => {
+          const timeA = new Date(a.duedate);
+          const timeB = new Date(b.duedate);
+          return timeA - timeB;
+        });
+
+        state.List = storedData
+
+        const datelist = storedData.slice()
+        const separatedValues = datelist.reduce((acc, obj) => {
+          // Check if there's an array for the date, if not, create one
+          if (!acc[obj.duedate]) {
+            acc[obj.duedate] = [];
+          }
+          // Push the value to the corresponding date's array
+          acc[obj.duedate].push(obj.id);
+          return acc;
+        }, {});
+
+        state.dateseperate = separatedValues
+        
+        //console.table(state)
+			}
+		},
+
+    addHomework(state, payload) {
+      state.List.push(payload)
+
+      state.List.sort((a, b) => {
+        const timeA = new Date(a.duedate);
+        const timeB = new Date(b.duedate);
+        return timeA - timeB;
+      });
+
+      const datelist = state.List.slice()
+      const separatedValues = datelist.reduce((acc, obj) => {
+        // Check if there's an array for the date, if not, create one
+        if (!acc[obj.duedate]) {
+          acc[obj.duedate] = [];
+        }
+        // Push the value to the corresponding date's array
+        acc[obj.duedate].push(obj.id);
+        return acc;
+      }, {});
+
+      state.dateseperate = separatedValues
+
+      localStorage.setItem('HomeworkList', JSON.stringify(state.List));
+    },
+
+    setFinish(state, payload) {
+      state.List.find(({ id }) => id === payload.id).finish = payload.isfinish
+
+      localStorage.setItem('HomeworkList', JSON.stringify(state.List));
     },
   },
 }
@@ -253,14 +323,13 @@ const GoalTimer = {
 
       // CHECK STREAK
       const timehistorysort = state.timerhistory.slice().sort((a, b) => new Date(b.date) - new Date(a.date));
-      console.table(timehistorysort)
+      //console.table(timehistorysort)
 
       let streak = 0;
       if (timehistorysort.length > 0) {
         if (timehistorysort[0].date === `${String(new Date().getFullYear())}-${String(new Date().getMonth() + 1).padStart(2, '0')}-${String(new Date().getDate()).padStart(2, '0')}`) {
           for (let i = 0; i < timehistorysort.length - 1; i++) {
-            if (timehistorysort[i].date)
-              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+              //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
             const currentDate = new Date(timehistorysort[i].date);
             const nextDate = new Date(timehistorysort[i + 1].date);
 
@@ -268,7 +337,7 @@ const GoalTimer = {
             const diffDays = Math.ceil(diffTime / (1000 * 60 * 60 * 24));
 
             if (diffDays !== 1 || timehistorysort[i + 1].time < 18000) {
-              console.log(`${timehistorysort[i].date} - notcontinue`)
+              //console.log(`${timehistorysort[i].date} - notcontinue`)
               break
             } else {
               streak++
@@ -280,7 +349,7 @@ const GoalTimer = {
         } else if (timehistorysort[0].date === `${String(YESTERDAY.getFullYear())}-${String(YESTERDAY.getMonth() + 1).padStart(2, '0')}-${String(YESTERDAY.getDate()).padStart(2, '0')}`) {
           if (timehistorysort[0].time >= 18000) {
             for (let i = 0; i < timehistorysort.length - 1; i++) {
-              console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
+              //console.log(`${timehistorysort[i].date} ${i} - ${timehistorysort[i].time}`)
               const currentDate = new Date(timehistorysort[i].date);
               const nextDate = new Date(timehistorysort[i + 1].date);
 
@@ -301,7 +370,7 @@ const GoalTimer = {
             streak = 0
           }
         }
-        console.log(streak)
+        //console.log(streak)
       }
       state.streak = streak
 
@@ -315,14 +384,14 @@ const GoalTimer = {
         const dateInTEXT = `${String(todaytomakeolddate.getFullYear())}-${String(todaytomakeolddate.getMonth()+1).padStart(2, '0')}-${String(todaytomakeolddate.getDate()).padStart(2, '0')}`
 
         if (state.timerhistory.find(({ date }) => date === dateInTEXT)) {
-          console.log(`${state.timerhistory.find(({ date }) => date === dateInTEXT).time} - ${state.timerhistory.find(({ date }) => date === dateInTEXT).date} - ${i}`)
+          //console.log(`${state.timerhistory.find(({ date }) => date === dateInTEXT).time} - ${state.timerhistory.find(({ date }) => date === dateInTEXT).date} - ${i}`)
 
           state.allring[i] = state.timerhistory.find(({ date }) => date === dateInTEXT).time
         }
 
       }
 
-      console.table(state.allring)
+      //console.table(state.allring)
 
 
 
@@ -422,6 +491,8 @@ export default new Vuex.Store({
     SubjectList,
     
     ScheduleList,
+
+    HomeworkList,
 
     GoalTimer
   }

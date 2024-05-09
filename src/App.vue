@@ -51,6 +51,8 @@ export default {
 
     this.$store.commit('ScheduleList/initialiseScheduleList');
 
+    this.$store.commit('HomeworkList/initialiseHomeworkList');
+
     this.$store.commit('GoalTimer/initialiseGoalTimer');
 	}
 }
