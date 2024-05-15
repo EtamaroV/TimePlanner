@@ -56,6 +56,12 @@
   box-sizing: border-box;
   margin: 0;
   font-weight: normal;
+  
+  user-select: none;
+}
+
+strong {
+  font-weight: bold;
 }
 
 body {
@@ -83,4 +89,8 @@ body {
   text-rendering: optimizeLegibility;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+}
+
+a {
+  -webkit-touch-callout: none;
 }

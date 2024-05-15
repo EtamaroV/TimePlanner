@@ -54,15 +54,17 @@ import { RouterLink, RouterView } from 'vue-router'
     position: fixed;
     width: 100%;
     bottom: 0;
-    height: calc(65px + env(safe-area-inset-bottom));
+    height: calc(50px + env(safe-area-inset-bottom));
 
     border-top: 1px solid #E3E3E3;
-    padding-top: 13.5px;
+    padding-top: 5px;
     padding-left: 5px;
     padding-right: 5px;
 
     display: flex;
     justify-content: space-around;
+
+    z-index: 9;
 }
 
 .navbtn {
@@ -95,7 +97,7 @@ import { RouterLink, RouterView } from 'vue-router'
 }
 
 .navbtn-icon {
-    height: 24px;
+    height: 23px;
 }
 
 </style>
