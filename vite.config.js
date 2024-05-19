@@ -51,7 +51,12 @@ export default defineConfig({
         "display": "standalone",
         "theme_color": "#FFFFFF",
         "description": "FOR NSC 2024"
-      }
+      },
+      "url_handlers": [
+        {
+          "origin": "https://timeplanner.etamarov.me"
+        },
+      ],
     })
   ],
   resolve: {
