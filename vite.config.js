@@ -50,7 +50,7 @@ export default defineConfig({
         "start_url": "/",
         "display": "standalone",
         "theme_color": "#FFFFFF",
-        "description": "FOR NSC 2024"
+        "description": "TimePlanner โปรแกรมจัดการเวลา | FOR NSC 2024"
       },
       "url_handlers": [
         {

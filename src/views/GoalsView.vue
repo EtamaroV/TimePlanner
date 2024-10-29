@@ -127,7 +127,7 @@ const store = useStore()
         
       </div>
       <div class="goals-bottom">
-        <Chart type="bar"  :data="chart" :options="options" />
+        <!--<Chart type="bar"  :data="chart" :options="options" />-->
       </div>
     </div>
 </template>

@@ -59,6 +59,7 @@ preventBrowserHistorySwipeGestures();
       </div>
       <div class="rightzone" v-if="(os !== 'iOS' && os !== 'iPadOS') || showbtn ">
         <Button label="ติดตั้ง" id="installPWABTN" pt:root:style="padding: 0.3rem 1rem !important;" />
+        <Button label="ภายหลัง"  severity="secondary" @click="isInstalled = true" pt:root:style="padding: 0.3rem 1rem !important;" />
       </div>
     </div>
 
@@ -217,5 +218,11 @@ export default {
   align-items: center;
   justify-content: space-between;
   height: 80px;
+}
+
+.rightzone {
+  display: flex;
+  flex-direction: column;
+  row-gap: 7px;
 }
 </style>
