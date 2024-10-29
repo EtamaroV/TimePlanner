@@ -4,7 +4,6 @@ import HomeView from '../views/HomeView.vue'
 import HomeworkView from '@/views/HomeworkView.vue'
 import SettingsView from '@/views/SettingsView.vue'
 import GoalsView from '@/views/GoalsView.vue'
-import Setting1View from '@/views/Setting1View.vue'
 
 //Components
 import Flyouttab from '@/components/Flyouttab.vue'
@@ -68,11 +67,6 @@ const router = createRouter({
       path: '/settings',
       name: 'settings',
       component: SettingsView
-    },
-    {
-      path: '/setting1',
-      name: 'setting1',
-      component: Setting1View
     },
     
   ]
