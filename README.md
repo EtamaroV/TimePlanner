@@ -1,29 +1,6 @@
-# nsc
+# [TimePlanner](timeplanner.etamarov.me)
+[timeplanner.etamarov.me](timeplanner.etamarov.me)
 
-This template should help get you started developing with Vue 3 in Vite.
+**TimePlanner** เป็นแอปพลิเคชั่นที่พัฒนาขึ้นเพื่อเข้าร่วม **การแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย คร้ังที่26 ( NSC 2024 )**
 
-## Recommended IDE Setup
-
-[VSCode](https://code.visualstudio.com/) + [Volar](https://marketplace.visualstudio.com/items?itemName=Vue.volar) (and disable Vetur).
-
-## Customize configuration
-
-See [Vite Configuration Reference](https://vitejs.dev/config/).
-
-## Project Setup
-
-```sh
-npm install
-```
-
-### Compile and Hot-Reload for Development
-
-```sh
-npm run dev
-```
-
-### Compile and Minify for Production
-
-```sh
-npm run build
-```
+โดย TimePlanner เป็น Progressive Web Application (PWA) ที่พัฒนาด้วย JavaScript และใช้ Vue.js Framework โดยแอปพลิเคชันนี้รองรับการทำงานแบบออฟไลน์และเก็บข้อมูลผู้ใช้ใน Local Storage ทำให้ผู้ใช้สามารถเข้าถึงข้อมูลได้แม้ไม่มีการเชื่อมต่ออินเทอร์เน็ต
