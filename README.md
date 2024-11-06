@@ -1,5 +1,5 @@
-# [TimePlanner](timeplanner.etamarov.me)
-[timeplanner.etamarov.me](timeplanner.etamarov.me)
+# [TimePlanner](https://timeplanner.etamarov.me)
+[timeplanner.etamarov.me](้https://timeplanner.etamarov.me)
 
 **TimePlanner** เป็นแอปพลิเคชั่นที่พัฒนาขึ้นเพื่อเข้าร่วม **การแข่งขันพัฒนาโปรแกรมคอมพิวเตอร์แห่งประเทศไทย คร้ังที่26 ( NSC 2024 )**
 
